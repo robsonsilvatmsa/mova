@@ -1,0 +1,24 @@
+<?php
+require_once('../config.php');
+require_once("../vendor/autoload.php");
+require_once(DBAPI);
+abresessao();
+
+use Source\controllers\ExportarValorUsuarioMelhoria;
+
+$value = [];
+
+$export = new ExportarValorUsuarioMelhoria();
+
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+$to = $post["start"];
+$end = $post["end"];
+
+
+if ($to) {
+    $export->exportar($to, $end);
+
+} else {
+    header("location: relatoriovalorrecebido.php");
+}
